@@ -16,6 +16,8 @@
 
 ## Cómo Usar el Script
 
+(MAs simple: Copia todo el script y pegalo en una ventana de teminal que hayas abierto como administrador)
+
 1.  **Descarga el Script**: Clona este repositorio o descarga el archivo `.ps1` directamente.
 
 2.  **Ejecútalo como Administrador**: Haz clic derecho sobre el archivo y selecciona "Ejecutar con PowerShell". Para una máxima compatibilidad, se recomienda abrir el **Terminal de Windows** o **PowerShell como administrador**, navegar a la carpeta donde guardaste el script y ejecutarlo con el siguiente comando:
