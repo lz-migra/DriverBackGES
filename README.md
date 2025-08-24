@@ -55,4 +55,4 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 **P: ¿Cómo sé si la restauración funcionó?**
 **R:** Puedes ir al **Administrador de Dispositivos** de Windows. Si todos los dispositivos tienen controladores instalados correctamente y no hay "dispositivos desconocidos" con un signo de admiración amarillo, la restauración fue exitosa.
 
-NOTA FINAL: YO LO USO PARA GESTIONAR LOS CONTROLADORES DE MIS EQUIPOS, YA ME LOS FORMATEO MUY FRECUENTEMENTE.
+NOTA FINAL: YO LO USO PARA GESTIONAR LOS CONTROLADORES DE MIS EQUIPOS, YA QUE LOS FORMATEO MUY FRECUENTEMENTE.
