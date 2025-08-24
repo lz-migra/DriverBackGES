@@ -16,7 +16,7 @@
 
 ## Cómo Usar el Script
 
-(MAs simple: Copia todo el script y pegalo en una ventana de teminal que hayas abierto como administrador)
+### **(Mas simple: Copia todo el script y pegalo en una ventana de teminal que hayas abierto como administrador)**
 
 1.  **Descarga el Script**: Clona este repositorio o descarga el archivo `.ps1` directamente.
 
