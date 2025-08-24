@@ -1,12 +1,5 @@
 # Script de PowerShell para gestionar controladores: Backup y Restauración
 
-# --- Bloque para solicitar permisos de Administrador ---
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    # Re-ejecuta el script con permisos de administrador
-    Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-    exit
-}
-
 # --- Cargar la librería necesaria para el cuadro de diálogo ---
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -88,6 +81,7 @@ while ($true) {
     Read-Host | Out-Null
     Clear-Host
     
+    # La solución para salir del script al presionar 3. 
     if ($choice -eq "3") {
         Exit
     }
