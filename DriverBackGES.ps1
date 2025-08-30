@@ -1,11 +1,11 @@
 # ============================
-# Script de PowerShell para gestionar controladores: Backup y Restauración
+# Script de PowerShell para gestionar controladores: Backup y Restauracion
 # ============================
 
 # Forzar que la consola interprete UTF-8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-# --- Verificar si el script se está ejecutando como Administrador ---
+# --- Verificar si el script se esta ejecutando como Administrador ---
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Add-Type -AssemblyName System.Windows.Forms
     [System.Windows.Forms.MessageBox]::Show(
@@ -17,7 +17,7 @@ If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Exit
 }
 
-# --- Cargar la librería necesaria para el cuadro de diálogo ---
+# --- Cargar la libreria necesaria para el cuadro de dialogo ---
 Add-Type -AssemblyName System.Windows.Forms
 
 # --- Funciones ---
@@ -38,7 +38,7 @@ function Create-Backup {
     $destinationPath = Select-FolderDialog "Selecciona la carpeta de destino para el Backup"
 
     if (-not $destinationPath) {
-        Write-Host "Operación cancelada. No se seleccionó ninguna ruta."
+        Write-Host "Operacion cancelada. No se selecciono ninguna ruta."
         return
     }
 
@@ -51,10 +51,10 @@ function Create-Backup {
 
 function Restore-Drivers {
     Write-Host "Por favor, selecciona la carpeta con la copia de seguridad de controladores."
-    $sourcePath = Select-FolderDialog "Selecciona la carpeta de origen para la Restauración"
+    $sourcePath = Select-FolderDialog "Selecciona la carpeta de origen para la Restauracion"
 
     if (-not $sourcePath) {
-        Write-Host "Operación cancelada. No se seleccionó ninguna ruta."
+        Write-Host "Operacion cancelada. No se selecciono ninguna ruta."
         return
     }
 
@@ -63,21 +63,21 @@ function Restore-Drivers {
         return
     }
 
-    Write-Host "Iniciando la restauración de los controladores desde '$sourcePath'..."
+    Write-Host "Iniciando la restauracion de los controladores desde '$sourcePath'..."
     pnputil /add-driver "$sourcePath\*.inf" /subdirs /install
 
-    Write-Host "Proceso de restauración completado. Es posible que debas reiniciar el sistema para que los cambios surtan efecto."
+    Write-Host "Proceso de restauracion completado. Es posible que debas reiniciar el sistema para que los cambios surtan efecto."
 }
 
-# --- Lógica Principal del Script ---
+# --- Logica Principal del Script ---
 while ($true) {
-    Write-Host "--- Menú de Gestión de Controladores ---"
+    Write-Host "--- Menu de Gestion de Controladores ---"
     Write-Host "1. Crear copia de seguridad de controladores (Backup)"
     Write-Host "2. Restaurar controladores desde una copia de seguridad"
     Write-Host "3. Salir"
     Write-Host "----------------------------------------"
 
-    $choice = Read-Host -Prompt "Ingresa tu elección (1, 2 o 3)"
+    $choice = Read-Host -Prompt "Ingresa tu eleccion (1, 2 o 3)"
 
     switch ($choice) {
         "1" {
@@ -87,18 +87,18 @@ while ($true) {
             Restore-Drivers
         }
         "3" {
-            Write-Host "Saliendo del script. ¡Adiós!"
+            Write-Host "Saliendo del script. ¡Adios!"
             break
         }
         default {
-            Write-Host "Opción no válida. Por favor, elige 1, 2 o 3."
+            Write-Host "Opcion no valida. Por favor, elige 1, 2 o 3."
         }
     }
     Write-Host "`nPresiona Enter para continuar..."
     Read-Host | Out-Null
     Clear-Host
     
-    # La solución para salir del script al presionar 3. 
+    # La solucion para salir del script al presionar 3. 
     if ($choice -eq "3") {
         Exit
     }
