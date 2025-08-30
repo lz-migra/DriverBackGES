@@ -1,6 +1,16 @@
-# --- Verificar privilegios de administrador ---
+# ============================
+# Script de PowerShell para gestionar controladores: Backup y Restauración
+# ============================
+
+# --- Verificar si el script se está ejecutando como Administrador ---
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    [System.Windows.Forms.MessageBox]::Show("Este script necesita ejecutarse como Administrador. Por favor, abre PowerShell/Terminal como Administrador y vuelve a ejecutar el script.", "Permisos insuficientes", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.MessageBox]::Show(
+        "Este script necesita ejecutarse como Administrador. Por favor, abre PowerShell/Terminal como Administrador y vuelve a ejecutar el script.",
+        "Permisos insuficientes",
+        [System.Windows.Forms.MessageBoxButtons]::OK,
+        [System.Windows.Forms.MessageBoxIcon]::Warning
+    )
     Exit
 }
 
@@ -58,7 +68,7 @@ function Restore-Drivers {
 
 # --- Lógica Principal del Script ---
 while ($true) {
-    Write-Host "`n--- Menú de Gestión de Controladores ---"
+    Write-Host "--- Menú de Gestión de Controladores ---"
     Write-Host "1. Crear copia de seguridad de controladores (Backup)"
     Write-Host "2. Restaurar controladores desde una copia de seguridad"
     Write-Host "3. Salir"
@@ -67,24 +77,26 @@ while ($true) {
     $choice = Read-Host -Prompt "Ingresa tu elección (1, 2 o 3)"
 
     switch ($choice) {
-        "1" { Create-Backup }
-        "2" { Restore-Drivers }
+        "1" {
+            Create-Backup
+        }
+        "2" {
+            Restore-Drivers
+        }
         "3" {
             Write-Host "Saliendo del script. ¡Adiós!"
             break
         }
-        default { Write-Host "Opción no válida. Por favor, elige 1, 2 o 3." }
+        default {
+            Write-Host "Opción no válida. Por favor, elige 1, 2 o 3."
+        }
     }
-
     Write-Host "`nPresiona Enter para continuar..."
     Read-Host | Out-Null
     Clear-Host
-
-    if ($choice -eq "3") { Exit }
-}
-
-    Read-Host | Out-Null
-    Clear-Host
-
-    if ($choice -eq "3") { Exit }
+    
+    # La solución para salir del script al presionar 3. 
+    if ($choice -eq "3") {
+        Exit
+    }
 }
