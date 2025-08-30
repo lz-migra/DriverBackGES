@@ -2,6 +2,9 @@
 # Script de PowerShell para gestionar controladores: Backup y Restauración
 # ============================
 
+# Forzar que la consola interprete UTF-8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 # --- Verificar si el script se está ejecutando como Administrador ---
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Add-Type -AssemblyName System.Windows.Forms
