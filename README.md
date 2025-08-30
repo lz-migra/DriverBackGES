@@ -4,57 +4,73 @@
 
 ## Características Principales
 
-  * **Copia de Seguridad (Backup) Completa**: Exporta todos los controladores de dispositivos de terceros instalados en tu sistema (tarjeta gráfica, audio, red, etc.) a una carpeta de tu elección. Utiliza la herramienta integrada de Windows **DISM**, garantizando que la copia de seguridad sea completa y precisa.
+* **Copia de Seguridad (Backup) Completa**: Exporta todos los controladores de dispositivos de terceros instalados en tu sistema (tarjeta gráfica, audio, red, etc.) a una carpeta de tu elección. Utiliza la herramienta integrada de Windows **DISM**, garantizando que la copia de seguridad sea completa y precisa.
 
-  * **Restauración Rápida**: Instala automáticamente todos los controladores desde una copia de seguridad previamente guardada. El script se apoya en **PnPUtil**, la utilidad de Plug and Play de Windows, para que la instalación sea rápida y eficiente.
+* **Restauración Rápida**: Instala automáticamente todos los controladores desde una copia de seguridad previamente guardada. El script se apoya en **PnPUtil**, la utilidad de Plug and Play de Windows, para que la instalación sea rápida y eficiente.
 
-  * **Interfaz Gráfica Amigable**: Olvídate de escribir rutas largas y propensas a errores. Al ejecutar el script, se abrirá un cuadro de diálogo gráfico que te permite navegar y seleccionar la carpeta de destino o de origen de manera visual y sencilla.
+* **Interfaz Gráfica Amigable**: Olvídate de escribir rutas largas y propensas a errores. Al ejecutar el script, se abrirá un cuadro de diálogo gráfico que te permite navegar y seleccionar la carpeta de destino o de origen de manera visual y sencilla.
 
-  * **Menú Interactivo**: El script presenta un menú claro e interactivo al inicio, dándote la opción de elegir entre "Backup" y "Restauración", lo que hace que su uso sea intuitivo incluso para usuarios principiantes.
+* **Menú Interactivo**: El script presenta un menú claro e interactivo al inicio, dándote la opción de elegir entre "Backup" y "Restauración", lo que hace que su uso sea intuitivo incluso para usuarios principiantes.
 
------
+---
 
 ## Cómo Usar el Script
 
-### **(Mas simple: Copia todo el script y pegalo en una ventana de teminal que hayas abierto como administrador)**
+### **1. Ejecución Local (Método Clásico)**
 
-1.  **Descarga el Script**: Clona este repositorio o descarga el archivo `.ps1` directamente.
+1. Descarga el archivo `DriverBackGES.ps1` desde este repositorio.
+2. Abre **PowerShell** como administrador.
+3. Navega a la carpeta donde guardaste el script.
+4. Ejecuta:
 
-2.  **Ejecútalo como Administrador**: Haz clic derecho sobre el archivo y selecciona "Ejecutar con PowerShell". Para una máxima compatibilidad, se recomienda abrir el **Terminal de Windows** o **PowerShell como administrador**, navegar a la carpeta donde guardaste el script y ejecutarlo con el siguiente comando:
+```powershell
+.\DriverBackGES.ps1
+```
 
-    ```powershell
-    .\DriverBackGES.ps1
-    ```
+5. Sigue las instrucciones del menú interactivo.
 
-3.  **Sigue las Instrucciones**:
+---
 
-      * Un menú te dará las opciones 1 (Backup), 2 (Restaurar) y 3 (Salir).
-      * Si eliges **1**, se abrirá un cuadro de diálogo para que selecciones la carpeta donde guardar la copia de seguridad.
-      * Si eliges **2**, se abrirá un cuadro de diálogo para que selecciones la carpeta donde se encuentra tu copia de seguridad.
-      * El script mostrará el progreso en la consola y te notificará cuando el proceso haya finalizado.
+### **2. Ejecución Remota (Directa desde GitHub)**
+
+Si deseas ejecutar el script directamente desde la web **sin descargarlo manualmente**, puedes hacerlo con el siguiente comando en PowerShell (como administrador):
+
+```powershell
+iwr -UseBasicParsing "https://raw.githubusercontent.com/lz-migra/DriverBackGES/refs/heads/main/DriverBackGES.ps1" | iex
+```
+
+> ⚠️ **Precaución**: Ejecutar scripts directamente desde internet con `Invoke-Expression (iex)` puede ser riesgoso si el origen no es confiable. Este método solo debe usarse con repositorios de confianza, como este.
+
+---
 
 ### Solución de Problemas
 
-Si recibes un error que indica que no puedes ejecutar el script, es posible que la política de ejecución de PowerShell esté restringida. Puedes solucionarlo temporalmente abriendo PowerShell como administrador y ejecutando este comando:
+Si recibes un error de ejecución debido a la política de PowerShell:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
------
+Luego, vuelve a ejecutar el script.
+
+---
 
 ## Preguntas Frecuentes
 
 **P: ¿Qué controladores se incluyen en la copia de seguridad?**
-**R:** El script, usando **DISM**, exporta todos los controladores de terceros instalados en tu sistema. No se incluyen los controladores nativos de Microsoft que vienen preinstalados con Windows, ya que estos se restauran automáticamente.
+**R:** Todos los controladores de terceros. Los controladores nativos de Windows no se incluyen, ya que se restauran automáticamente.
 
-**P: ¿Puedo usar la copia de seguridad en una versión diferente de Windows?**
-**R:** Generalmente, sí. Un driver de un dispositivo es compatible con una arquitectura de sistema (32-bit o 64-bit) y no con una versión específica de Windows. Sin embargo, se recomienda usar la copia de seguridad en la misma versión o en una versión posterior (por ejemplo, de Windows 10 a Windows 11).
+**P: ¿Puedo usar la copia de seguridad en otra versión de Windows?**
+**R:** Generalmente sí, mientras la arquitectura (32/64 bits) sea compatible. Se recomienda usar la misma versión o posterior de Windows.
 
-**P: ¿El script modifica algo en mi sistema?**
-**R:** El script solo lee los controladores del sistema para la copia de seguridad y los instala en la restauración. No modifica archivos del sistema ni configuraciones críticas.
+**P: ¿El script modifica mi sistema?**
+**R:** No, solo lee los controladores y los instala en la restauración. No altera archivos críticos del sistema.
 
-**P: ¿Cómo sé si la restauración funcionó?**
-**R:** Puedes ir al **Administrador de Dispositivos** de Windows. Si todos los dispositivos tienen controladores instalados correctamente y no hay "dispositivos desconocidos" con un signo de admiración amarillo, la restauración fue exitosa.
+**P: ¿Cómo sé si la restauración fue exitosa?**
+**R:** Verifica en el **Administrador de Dispositivos** que no haya "dispositivos desconocidos" con signos de admiración amarillos.
 
-NOTA FINAL: YO LO USO PARA GESTIONAR LOS CONTROLADORES DE MIS EQUIPOS, YA QUE LOS FORMATEO MUY FRECUENTEMENTE.
+---
+
+💡 **Tip del Autor**: Yo uso DriverBackGES para gestionar los controladores de mis equipos, especialmente porque formateo y reinstalo Windows con frecuencia.
+
+---
