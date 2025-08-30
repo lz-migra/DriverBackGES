@@ -1,14 +1,6 @@
 # --- Verificar privilegios de administrador ---
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    Write-Warning "El script necesita privilegios de administrador. Se relanzará con elevación..."
-    
-    # Relanzar el script con elevación
-    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-
-    # Mantener la ventana abierta para ver cualquier mensaje
-    Write-Host "`nEl script se está relanzando con permisos de administrador..."
-    Write-Host "Si la ventana se cierra, puedes ejecutar PowerShell como administrador y lanzar este script manualmente."
-    Read-Host "Presiona Enter para salir del proceso actual"
+    [System.Windows.Forms.MessageBox]::Show("Este script necesita ejecutarse como Administrador. Por favor, abre PowerShell/Terminal como Administrador y vuelve a ejecutar el script.", "Permisos insuficientes", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Warning)
     Exit
 }
 
@@ -85,6 +77,12 @@ while ($true) {
     }
 
     Write-Host "`nPresiona Enter para continuar..."
+    Read-Host | Out-Null
+    Clear-Host
+
+    if ($choice -eq "3") { Exit }
+}
+
     Read-Host | Out-Null
     Clear-Host
 
