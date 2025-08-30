@@ -1,7 +1,14 @@
 # --- Verificar privilegios de administrador ---
 If (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "El script necesita privilegios de administrador. Se relanzará con elevación..."
+    
+    # Relanzar el script con elevación
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+
+    # Mantener la ventana abierta para ver cualquier mensaje
+    Write-Host "`nEl script se está relanzando con permisos de administrador..."
+    Write-Host "Si la ventana se cierra, puedes ejecutar PowerShell como administrador y lanzar este script manualmente."
+    Read-Host "Presiona Enter para salir del proceso actual"
     Exit
 }
 
@@ -59,7 +66,7 @@ function Restore-Drivers {
 
 # --- Lógica Principal del Script ---
 while ($true) {
-    Write-Host "--- Menú de Gestión de Controladores ---"
+    Write-Host "`n--- Menú de Gestión de Controladores ---"
     Write-Host "1. Crear copia de seguridad de controladores (Backup)"
     Write-Host "2. Restaurar controladores desde una copia de seguridad"
     Write-Host "3. Salir"
@@ -68,25 +75,18 @@ while ($true) {
     $choice = Read-Host -Prompt "Ingresa tu elección (1, 2 o 3)"
 
     switch ($choice) {
-        "1" {
-            Create-Backup
-        }
-        "2" {
-            Restore-Drivers
-        }
+        "1" { Create-Backup }
+        "2" { Restore-Drivers }
         "3" {
             Write-Host "Saliendo del script. ¡Adiós!"
             break
         }
-        default {
-            Write-Host "Opción no válida. Por favor, elige 1, 2 o 3."
-        }
+        default { Write-Host "Opción no válida. Por favor, elige 1, 2 o 3." }
     }
+
     Write-Host "`nPresiona Enter para continuar..."
     Read-Host | Out-Null
     Clear-Host
-    
-    if ($choice -eq "3") {
-        Exit
-    }
+
+    if ($choice -eq "3") { Exit }
 }
