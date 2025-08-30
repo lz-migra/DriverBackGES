@@ -39,7 +39,7 @@ Si deseas ejecutar el script directamente desde la web **sin descargarlo manualm
 iwr -UseBasicParsing "https://raw.githubusercontent.com/lz-migra/DriverBackGES/refs/heads/main/DriverBackGES.ps1" | iex
 ```
 
-> ⚠️ **Precaución**: Ejecutar scripts directamente desde internet con `Invoke-Expression (iex)` puede ser riesgoso si el origen no es confiable. Este método solo debe usarse con repositorios de confianza, como este.
+> ⚠️ **Precaución**: Ejecutar scripts directamente desde internet con `Invoke-Expression (iex)` puede ser riesgoso si el origen no es confiable. Este método solo debe usarse con repositorios de confianza.
 
 ---
 
