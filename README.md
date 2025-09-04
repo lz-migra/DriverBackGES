@@ -1,16 +1,27 @@
-# DriverBackGES (Driver Backup & Gestion Script)
+¡Perfecto 🚀!
+Te armé una adaptación de esa descripción pero para nuestro proyecto **MHTML2Files** (el extractor de snapshots en MHTML que desarrollamos).
 
-**DriverBackGES** es una herramienta esencial, simple y potente, diseñada para simplificar el proceso de **copia de seguridad y restauración de controladores** en cualquier sistema operativo Windows. Ideal para antes de una reinstalación limpia, para migrar tus drivers a un nuevo PC o simplemente para tener un respaldo de emergencia. Este script te permite decir adiós a la tediosa búsqueda manual de drivers en internet, ahorrándote tiempo y posibles problemas de compatibilidad.
+---
+
+# MHTML2Files (Extractor de Snapshots MHTML)
+
+**MHTML2Files** es una herramienta práctica, ligera y potente que simplifica el proceso de **extraer y organizar todos los recursos (HTML, CSS, JS, imágenes, fuentes, etc.) contenidos en un archivo `.mhtml`**. Ideal para desarrolladores web, archivistas digitales o cualquier persona que quiera inspeccionar y reutilizar páginas web guardadas en formato MHTML.
+
+Este proyecto surge para resolver un problema común: los navegadores guardan las páginas en `.mhtml` como un único archivo, y acceder a los recursos internos (que aparecen como `@mhtml.blink`) de forma manual es tedioso. Con **MHTML2Files**, todo se desempaqueta automáticamente en carpetas listas para usar.
+
+---
 
 ## Características Principales
 
-* **Copia de Seguridad (Backup) Completa**: Exporta todos los controladores de dispositivos de terceros instalados en tu sistema (tarjeta gráfica, audio, red, etc.) a una carpeta de tu elección. Utiliza la herramienta integrada de Windows **DISM**, garantizando que la copia de seguridad sea completa y precisa.
+* **Extracción Completa**: Convierte cualquier archivo `.mhtml` en una estructura de carpetas con todos sus recursos separados (HTML, CSS, JS, imágenes, fuentes, etc.).
 
-* **Restauración Rápida**: Instala automáticamente todos los controladores desde una copia de seguridad previamente guardada. El script se apoya en **PnPUtil**, la utilidad de Plug and Play de Windows, para que la instalación sea rápida y eficiente.
+* **Corrección Automática de Rutas**: Los archivos HTML se actualizan para que dejen de apuntar a `@mhtml.blink` y enlacen correctamente a los recursos extraídos.
 
-* **Interfaz Gráfica Amigable**: Olvídate de escribir rutas largas y propensas a errores. Al ejecutar el script, se abrirá un cuadro de diálogo gráfico que te permite navegar y seleccionar la carpeta de destino o de origen de manera visual y sencilla.
+* **Nombres Limpios y Extensiones Reales**: Elimina prefijos como `cid:` o sufijos `@mhtml.blink`, reemplazando por extensiones reales en base al tipo MIME (`.css`, `.js`, `.png`, etc.).
 
-* **Menú Interactivo**: El script presenta un menú claro e interactivo al inicio, dándote la opción de elegir entre "Backup" y "Restauración", lo que hace que su uso sea intuitivo incluso para usuarios principiantes.
+* **Compatibilidad Universal**: Funciona con cualquier archivo `.mhtml` generado en navegadores modernos como Chrome, Edge u Opera.
+
+* **Interfaz Gráfica Sencilla (PowerShell)**: Incluye un script `.ps1` que permite seleccionar los archivos `.mhtml` de forma visual, sin necesidad de escribir rutas manualmente.
 
 ---
 
@@ -18,34 +29,35 @@
 
 ### **1. Ejecución Local (Método Clásico)**
 
-1. Descarga el archivo `DriverBackGES.ps1` desde este repositorio.
-2. Abre **PowerShell** como administrador.
+1. Descarga el archivo `MHTML2Files.ps1` desde este repositorio.
+2. Abre **PowerShell**.
 3. Navega a la carpeta donde guardaste el script.
 4. Ejecuta:
 
 ```powershell
-.\DriverBackGES.ps1
+.\MHTML2Files.ps1
 ```
 
-5. Sigue las instrucciones del menú interactivo.
+5. Selecciona el archivo `.mhtml` a procesar.
+6. Se creará una carpeta con todos los recursos extraídos.
 
 ---
 
 ### **2. Ejecución Remota (Directa desde GitHub)**
 
-Si deseas ejecutar el script directamente desde la web **sin descargarlo manualmente**, puedes hacerlo con el siguiente comando en PowerShell (como administrador):
+Si deseas ejecutar el script directamente desde la web **sin descargarlo manualmente**, puedes hacerlo con el siguiente comando en PowerShell:
 
 ```powershell
-iwr -UseBasicParsing "https://raw.githubusercontent.com/lz-migra/DriverBackGES/refs/heads/main/DriverBackGES.ps1" | iex
+iwr -UseBasicParsing "https://raw.githubusercontent.com/lz-migra/MHTML2Files/refs/heads/main/MHTML2Files.ps1" | iex
 ```
 
-> ⚠️ **Precaución**: Ejecutar scripts directamente desde internet con `Invoke-Expression (iex)` puede ser riesgoso si el origen no es confiable. Este método solo debe usarse con repositorios de confianza.
+> ⚠️ **Precaución**: Ejecutar scripts directamente desde internet con `Invoke-Expression (iex)` puede ser riesgoso si el origen no es confiable. Usa este método solo con repositorios de confianza.
 
 ---
 
-### Solución de Problemas
+## Solución de Problemas
 
-Si recibes un error de ejecución debido a la política de PowerShell:
+Si PowerShell bloquea la ejecución del script:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
@@ -57,20 +69,14 @@ Luego, vuelve a ejecutar el script.
 
 ## Preguntas Frecuentes
 
-**P: ¿Qué controladores se incluyen en la copia de seguridad?**
-**R:** Todos los controladores de terceros. Los controladores nativos de Windows no se incluyen, ya que se restauran automáticamente.
+**P: ¿Qué archivos extrae el script?**
+**R:** Todos los recursos incrustados en el `.mhtml` (HTML, CSS, JS, imágenes, fuentes, etc.).
 
-**P: ¿Puedo usar la copia de seguridad en otra versión de Windows?**
-**R:** Generalmente sí, mientras la arquitectura (32/64 bits) sea compatible. Se recomienda usar la misma versión o posterior de Windows.
+**P: ¿Puedo usarlo con varios archivos `.mhtml` a la vez?**
+**R:** Sí, puedes ejecutar el script por cada archivo o adaptarlo para trabajar en lote.
 
 **P: ¿El script modifica mi sistema?**
-**R:** No, solo lee los controladores y los instala en la restauración. No altera archivos críticos del sistema.
+**R:** No, solo lee el `.mhtml` y extrae su contenido en carpetas nuevas.
 
-**P: ¿Cómo sé si la restauración fue exitosa?**
-**R:** Verifica en el **Administrador de Dispositivos** que no haya "dispositivos desconocidos" con signos de admiración amarillos.
-
----
-
-💡 **Tip del Autor**: Yo uso DriverBackGES para gestionar los controladores de mis equipos, especialmente porque formateo y reinstalo Windows con frecuencia.
-
----
+**P: ¿Cómo sé que los recursos quedaron bien enlazados?**
+**R:** Abre el HTML extraído en tu navegador. Deberías ver la página renderizada correctamente con todos sus estilos e imágenes.
