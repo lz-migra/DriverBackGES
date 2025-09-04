@@ -1,8 +1,3 @@
-¡Perfecto 🚀!
-Te armé una adaptación de esa descripción pero para nuestro proyecto **MHTML2Files** (el extractor de snapshots en MHTML que desarrollamos).
-
----
-
 # MHTML2Files (Extractor de Snapshots MHTML)
 
 **MHTML2Files** es una herramienta práctica, ligera y potente que simplifica el proceso de **extraer y organizar todos los recursos (HTML, CSS, JS, imágenes, fuentes, etc.) contenidos en un archivo `.mhtml`**. Ideal para desarrolladores web, archivistas digitales o cualquier persona que quiera inspeccionar y reutilizar páginas web guardadas en formato MHTML.
